@@ -1,10 +1,10 @@
-class lineas {
+class linea {
   float X, Y, X2, Y2;
   void display() {
     strokeWeight(2);
     line (X, Y, X2, Y2);
   }
-  lineas(float x1, float y1, float x2, Float y2 ) {
+  linea(float x1, float y1, float x2, Float y2 ) {
     X = x1;
     Y = y1;
     X2 = x2;

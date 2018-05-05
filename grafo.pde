@@ -1,9 +1,14 @@
 class Grafo {
   String archivo;
-  int pf;
   void display() {
-    Table table = loadTable( archivo , "header");
+    Table table = loadTable( archivo, "header");
     matriz = new int[table.getColumnCount()][table.getColumnCount()];
+    for (int i = 0; i<table.getColumnCount(); i++) {
+      for (int j = 0; j<table.getColumnCount(); j++) {
+        TableRow row = table.getRow(i+table.getColumnCount()+1);
+        matriz[i][j]= row.getInt(j);
+      }
+    }
     for (int i=0; i<table.getColumnCount(); i++) {
       TableRow row = table.getRow(i);
       x = row.getFloat("x");
@@ -12,27 +17,18 @@ class Grafo {
       nodo nod = new nodo(n[i]);
       nod.display();
     }
-    for (int i=1; i<table.getColumnCount(); i++) {
-      strokeWeight(7);
-      if (i<table.getColumnCount()) {
-        stroke(205);
-        lineas linea = new lineas(n[i-1].x, n[i-1].y, n[i].x, n[i].y);
-        linea.display();
-      } else {
-        stroke(205);
-        lineas linea = new lineas(n[table.getColumnCount()-1].x, n[table.getColumnCount()-1].y, n[pf].x, n[pf].y);
-        linea.display();
-      }
-    }
     for (int i = 0; i<table.getColumnCount(); i++) {
       for (int j = 0; j<table.getColumnCount(); j++) {
-        TableRow row = table.getRow(i+12);
-        matriz[i][j]= row.getInt(j);
+        if (matriz[i][j]!=0) {
+          strokeWeight(7);
+          stroke(205);
+          linea line = new linea(n[i].x, n[i].y, n[j].x, n[j].y);
+          line.display();
+        }
       }
     }
   }
-  Grafo (String file, int p) {
+  Grafo (String file) {
     archivo=file;
-    pf=p;
   }
 }

@@ -4,12 +4,13 @@ boolean mouse;
 float X, Y, X2, Y2;
 float x1, x2, y1, y2, x, y;
 int[][] matriz, matrizn;
-PVector[] n = new PVector[11];
+PVector[] n;
 void setup() {
   size (600, 400);
   background(0, 245, 250);
-  Table table = loadTable( "nivel1.csv", "header");
+  Table table = loadTable( "nivel3.csv", "header");
   col=table.getColumnCount();
+  n = new PVector[col];
   x1=0;
   y1=0;
   x2=0;
@@ -21,7 +22,7 @@ void setup() {
       matrizn[i][j]=0;
     }
   }
-  Grafo grafo = new Grafo("nivel1.csv", 8);
+  Grafo grafo = new Grafo("nivel3.csv");
   grafo.display();
 }
 void draw() {
@@ -48,15 +49,15 @@ void draw() {
       }
     }
   }
-  lineas lin = new lineas(x1, y1, x2, y2);
+  linea lin = new linea(x1, y1, x2, y2);
   lin.display();
   x1=x2;
   y1=y2;
   I1=I2;
-  if (matrizn==matriz) {
+  if (ganar()==true) {
     noLoop();
-    setup();
-  }
+    print("gano");
+  } 
 }
 void mousePressed() {
   mousePressed=true;
@@ -79,18 +80,16 @@ void llenarmatriz() {
 
 void keyPressed() {
   if (key == 'r' || key == 'R') {
-    for (int i = 0; i<col; i++) {
-      println();
-      for (int j = 0; j<col; j++) {
-        print(matriz[i][j]);
-      }
-    }
-    println();
-    for (int i = 0; i<col; i++) {
-      println();
-      for (int j = 0; j<col; j++) {
-        print(matrizn[i][j]);
+    setup();
+  }
+}
+boolean ganar(){
+  for (int i = 0; i<col; i++) {
+    for (int j = 0; j<col; j++) {
+      if(matrizn[i][j]!=matriz[i][j]){
+        return false; 
       }
     }
   }
+  return true;
 }
