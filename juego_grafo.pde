@@ -1,5 +1,5 @@
-int I1, I2, col, count, p, l;
-boolean mousePressed, mouse;
+int I1, I2, col, count, l;
+boolean mousePressed, mouse, N;
 float X, Y, X2, Y2, x1, x2, y1, y2, x, y;
 int[][] matriz, matrizn;
 PVector[] n;
@@ -7,6 +7,11 @@ StringList level = new StringList(3);
 void setup() {
   size (600, 400);
   background(0, 245, 250);
+  if (N==true) { 
+    textSize(32);
+    fill(145, 69, 200);
+    text("Presione r dos veces para continuar", 35, 35);
+  }
   level.append("nivel1.csv");
   level.append("nivel2.csv");
   level.append("nivel3.csv");
@@ -15,7 +20,6 @@ void setup() {
   n = new PVector[col];
   I1=0; 
   I2=0;
-  p=0;
   mouse = false;
   matrizn = new int[table.getColumnCount()][table.getColumnCount()];
   for (int i = 0; i<table.getColumnCount(); i++) {
@@ -25,7 +29,6 @@ void setup() {
   }
   Grafo grafo = new Grafo(level.get(l));
   grafo.display();
-  loop();
 }
 void draw() {
   stroke(0);
@@ -59,20 +62,16 @@ void draw() {
         x1=x2;
         y1=y2;
         I1=I2;
-        p++;
       }
     }
-  }
-  if (p>=13 && ganar()==false) {
-    textSize(32);
-    fill(145, 69, 200);
-    text("Presione r para reiniciar", 35, 35);
   }
   if (ganar()==true) {
     if (l<=3) {
       l++;
+      N=true;
+      noLoop();
+      setup();
     }
-    setup();
   }
 }
 void mousePressed() {
@@ -95,10 +94,9 @@ void llenarmatriz() {
 
 void keyPressed() {
   if (key == 'r' || key == 'R') {
+    N=false;
+    loop();
     setup();
-  }
-  if (key == 'c' || key == 'C') {
-    crear();
   }
 }
 boolean ganar() {
