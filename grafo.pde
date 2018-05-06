@@ -9,6 +9,13 @@ class Grafo {
         matriz[i][j]= row.getInt(j);
       }
     }
+    for (int i = 0; i<table.getColumnCount(); i++) {
+      for (int j = 0; j<table.getColumnCount(); j++) {
+        if (matriz[i][j]!=0) {
+          count+=1;
+        }
+      }
+    }
     for (int i=0; i<table.getColumnCount(); i++) {
       TableRow row = table.getRow(i);
       x = row.getFloat("x");
