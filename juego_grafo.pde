@@ -97,6 +97,9 @@ void keyPressed() {
   if (key == 'r' || key == 'R') {
     setup();
   }
+  if (key == 'c' || key == 'C') {
+    crear();
+  }
 }
 boolean ganar() {
   for (int i = 0; i<col; i++) {
