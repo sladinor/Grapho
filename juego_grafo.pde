@@ -1,4 +1,4 @@
-int I1, I2, col, count, l;
+int I1, I2, col, count, p, l;
 boolean mousePressed, mouse;
 float X, Y, X2, Y2, x1, x2, y1, y2, x, y;
 int[][] matriz, matrizn;
@@ -15,6 +15,7 @@ void setup() {
   n = new PVector[col];
   I1=0; 
   I2=0;
+  p=0;
   mouse = false;
   matrizn = new int[table.getColumnCount()][table.getColumnCount()];
   for (int i = 0; i<table.getColumnCount(); i++) {
@@ -53,15 +54,16 @@ void draw() {
     for (int j = 0; j<col; j++) {
       if (i==I1 && j==I2 && matriz[I1][I2]!=0) {
         llenarmatriz();
-        linea lin = new linea(x1, y1, x2, y2);
+        Linea lin = new Linea(x1, y1, x2, y2);
         lin.display();
         x1=x2;
         y1=y2;
         I1=I2;
+        p++;
       }
     }
   }
-  if (ganar()==false) {
+  if (p>=13 && ganar()==false) {
     textSize(32);
     fill(145, 69, 200);
     text("Presione r para reiniciar", 35, 35);
@@ -94,6 +96,9 @@ void llenarmatriz() {
 void keyPressed() {
   if (key == 'r' || key == 'R') {
     setup();
+  }
+  if (key == 'c' || key == 'C') {
+    crear();
   }
 }
 boolean ganar() {

@@ -29,7 +29,7 @@ class Grafo {
         if (matriz[i][j]!=0) {
           strokeWeight(7);
           stroke(205);
-          linea line = new linea(n[i].x, n[i].y, n[j].x, n[j].y);
+          Linea line = new Linea(n[i].x, n[i].y, n[j].x, n[j].y);
           line.display();
         }
       }
